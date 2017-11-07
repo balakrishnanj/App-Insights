@@ -1,0 +1,37 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Identifi.Infrastructure</id>
+    <version>1.0.0</version>
+    <authors>Evolent App Dev</authors>
+    <owners>Evolent Health</owners>
+    <licenseUrl>https://www.myidentifi.com</licenseUrl>
+    <projectUrl>https://www.myidentifi.com</projectUrl>
+    <iconUrl>https://www.myidentifi.com/Launcher/images/identifi_white_big.4c8cc4b6b.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Identifi Infrastructure</description>
+    <releaseNotes>First version of Identifi Infrastructure.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Identifi Infrastructure</tags>
+    <dependencies>
+      <dependency id="Identifi.Essentials" version="0.5.1" />
+      <dependency id="Identifi.Infrastructure" version="0.5.3" />
+      <dependency id="Microsoft.AI.Agent.Intercept" version="2.4.0.0" />
+      <dependency id="Microsoft.AI.DependencyCollector" version="2.4.1.0" />
+      <dependency id="Microsoft.AI.PerfCounterCollector" version="2.4.1.0" />
+      <dependency id="Microsoft.AI.ServerTelemetryChannel" version="2.4.0.0" />
+      <dependency id="Microsoft.AI.Web" version="2.4.1.0" />
+      <dependency id="Microsoft.AI.WindowsServer" version="2.4.1.0" />
+      <dependency id="Microsoft.ApplicationInsights" version="2.4.0.0" />
+	  <dependency id="Microsoft.ApplicationInsights.Log4NetAppender" version="2.4.1.0" />
+      <dependency id="Microsoft.ApplicationServer.Caching.Client" version="1.0.0.0" />
+      <dependency id="Microsoft.ApplicationServer.Caching.Core" version="1.0.0.0" />
+      <dependency id="Microsoft.AspNet.TelemetryCorrelation" version="1.0.0.0" />
+	  <dependency id="System.Diagnostics.DiagnosticSource" version="4.0.2.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Identifi.AppInsights.dll" target="lib\net46\Identifi.AppInsights.dll" />
+    <file src="Identifi.AppInsights.pdb" target="lib\net46\Identifi.AppInsights.pdb" />
+  </files>
+</package>

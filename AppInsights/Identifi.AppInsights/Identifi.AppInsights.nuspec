@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Identifi.Infrastructure</id>
+    <id>Identifi.AppInsights</id>
     <version>1.0.0</version>
     <authors>Evolent App Dev</authors>
     <owners>Evolent Health</owners>
@@ -9,10 +9,10 @@
     <projectUrl>https://www.myidentifi.com</projectUrl>
     <iconUrl>https://www.myidentifi.com/Launcher/images/identifi_white_big.4c8cc4b6b.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Identifi Infrastructure</description>
-    <releaseNotes>First version of Identifi Infrastructure.</releaseNotes>
+    <description>Identifi.AppInsights</description>
+    <releaseNotes>First version of Identifi AppInsights.</releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>Identifi Infrastructure</tags>
+    <tags>Identifi AppInsights</tags>
     <dependencies>
       <dependency id="Identifi.Essentials" version="0.5.1" />
       <dependency id="Identifi.Infrastructure" version="0.5.3" />

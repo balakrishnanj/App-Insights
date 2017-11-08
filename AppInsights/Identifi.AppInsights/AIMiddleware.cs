@@ -39,12 +39,7 @@ namespace Identifi.AppInsights
            
             var requestBody = context.Request.GetRequestBody();
 
-            if (!LogActivityMethods.Contains(context.Request.Method))
-            {
-                return;
-            }
-
-            if (ResourceEndpointToIgnore.Any(res => context.Request.Uri.PathAndQuery.Contains(res)))
+            if (!LogActivityMethods.Contains(context.Request.Method) || ResourceEndpointToIgnore.Any(res => context.Request.Uri.PathAndQuery.Contains(res)))
             {
                 requestBody = string.Empty;
             }
@@ -53,18 +48,22 @@ namespace Identifi.AppInsights
 
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new AITelemetryInitializer());
 
-            telemetryClient.TrackTrace(requestBody);
-
-            using (var operation = telemetryClient.StartOperation<RequestTelemetry>(IdentifiLogContext.CurrentServiceRequestId))
+            if (!string.IsNullOrEmpty(requestBody))
             {
-                telemetryClient.TrackTrace("Invoking call...");
-
-                await Next.Invoke(context);
-
-                telemetryClient.StopOperation(operation);
+                telemetryClient.TrackTrace(requestBody, new Dictionary<string, string> { { "ServiceRequestId", IdentifiLogContext.CurrentServiceRequestId } });
             }
 
-               
+            await Next.Invoke(context);
+
+            //telemetryClient.TrackTrace(requestBody, SeverityLevel.Information, new Dictionary<string, string> { { "ServiceRequestId", IdentifiLogContext.CurrentServiceRequestId } });
+
+            //using (var operation = telemetryClient.StartOperation<RequestTelemetry>(IdentifiLogContext.CurrentServiceRequestId))
+            //{
+            //    await Next.Invoke(context);
+            //    telemetryClient.StopOperation(operation);
+            //}
+
+
         }
     }
 }

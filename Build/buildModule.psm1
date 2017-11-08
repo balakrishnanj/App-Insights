@@ -243,9 +243,11 @@ function CreateNugets([string]$nuspecFolderPath, [string]$version, [string]$outp
     LogBlockOpenMessage "$($MyInvocation.MyCommand.Name)"
 
     $nuspecsPath = Join-Path $nuspecFolderPath "*.nuspec"
+	Write-Output "Nuget Spec path: $nuspecsPath"
     $files = Get-ChildItem $nuspecsPath
 
     ForEach ($file in $files) {
+		Write-Output "File: $file"
         & $_nugetExePath pack $file -version $version -outputdirectory $outputPath
     }
 

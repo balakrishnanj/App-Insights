@@ -4,7 +4,7 @@
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyCompany("Evolent Health")]
-[assembly: AssemblyProduct("Identifi Infrastructure")]
+[assembly: AssemblyProduct("Identifi AppInsights")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 

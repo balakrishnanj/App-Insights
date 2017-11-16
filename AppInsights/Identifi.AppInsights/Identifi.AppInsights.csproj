@@ -293,10 +293,11 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AIBootstrapTelemetryInitializer.cs" />
     <Compile Include="AIDependency.cs" />
     <Compile Include="AIException.cs" />
     <Compile Include="AIMiddleware.cs" />
-    <Compile Include="AITelemetryInitializer.cs" />
+    <Compile Include="AIRequestTelemetryInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

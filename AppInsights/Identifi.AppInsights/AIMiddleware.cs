@@ -13,6 +13,7 @@ namespace Identifi.AppInsights
 {
     public class AIMiddleware: OwinMiddleware
     {
+        private const string DisableTelemetryConfigKey = "DisableTelemetry";
         private static readonly IEnumerable<string> LogActivityMethods = new List<string>
         {
             HttpMethod.Get.Method,
@@ -36,33 +37,24 @@ namespace Identifi.AppInsights
 
         public override async Task Invoke(IOwinContext context)
         {
-           
-            var requestBody = context.Request.GetRequestBody();
+            var telemetryClient = new TelemetryClient();
 
-            if (!LogActivityMethods.Contains(context.Request.Method) || ResourceEndpointToIgnore.Any(res => context.Request.Uri.PathAndQuery.Contains(res)))
+            //Update UserId, session Id, and Service request Id for each telemetry
+            TelemetryConfiguration.Active.TelemetryInitializers.Add(new AIRequestTelemetryInitializer());
+
+            //Send request body for POST data.
+            var requestBody = context.Request.GetRequestBody();
+            if (!LogActivityMethods.Contains(context.Request.Method) 
+                || ResourceEndpointToIgnore.Any(res => context.Request.Uri.PathAndQuery.Contains(res)))
             {
                 requestBody = string.Empty;
             }
-
-            var telemetryClient = new TelemetryClient();
-
-            TelemetryConfiguration.Active.TelemetryInitializers.Add(new AITelemetryInitializer());
-
             if (!string.IsNullOrEmpty(requestBody))
             {
-                telemetryClient.TrackTrace(requestBody, new Dictionary<string, string> { { "ServiceRequestId", IdentifiLogContext.CurrentServiceRequestId } });
+                telemetryClient.TrackTrace(requestBody, SeverityLevel.Information, new Dictionary<string, string> { { "ServiceRequestId", IdentifiLogContext.CurrentServiceRequestId } });
             }
 
             await Next.Invoke(context);
-
-            //telemetryClient.TrackTrace(requestBody, SeverityLevel.Information, new Dictionary<string, string> { { "ServiceRequestId", IdentifiLogContext.CurrentServiceRequestId } });
-
-            //using (var operation = telemetryClient.StartOperation<RequestTelemetry>(IdentifiLogContext.CurrentServiceRequestId))
-            //{
-            //    await Next.Invoke(context);
-            //    telemetryClient.StopOperation(operation);
-            //}
-
 
         }
     }

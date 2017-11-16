@@ -17,8 +17,9 @@ namespace Identifi.AppInsights
             }
             catch (Exception ex)
             {
-                telemetryClient.TrackException(ex);
                 success = false;
+                telemetryClient.TrackException(ex);
+                throw;
             }
             finally
             {
@@ -39,8 +40,10 @@ namespace Identifi.AppInsights
             }
             catch (Exception ex)
             {
-                telemetryClient.TrackException(ex);
                 success = false;
+                telemetryClient.TrackException(ex);
+                throw;
+
             }
             finally
             {
